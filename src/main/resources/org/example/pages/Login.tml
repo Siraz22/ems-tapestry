@@ -1,20 +1,24 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd">
 <body style="margin: 10px;">
 <h2>Login Form</h2>
-   <div class="row">
-       <t:form t:id="loginForm">
-           <div class="col-12">
-               <label for="username">Username</label>
-               <t:textfield t:id="username"/>
-           </div>
-           <div class="col-12">
-               <label for="password">Password</label>
-               <t:textfield type="password" t:id="password"/>
-           </div>
-           <div class="col-12">
-               <t:submit value="Login"/>
-           </div>
-       </t:form>
-   </div>
+<t:form t:id="form" class="form-horizontal">
+    <div class="form-group">
+        <t:label for="username" class="col-sm-2"/>
+        <div class="col-sm-4">
+            <t:textfield t:id="username"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <t:label for="password" class="col-sm-2"/>
+        <div class="col-sm-4">
+            <t:textfield type="password" t:id="password"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-4 col-sm-offset-2">
+            <t:submit value="Login"/>
+        </div>
+    </div>
+</t:form>
 </body>
 </html>

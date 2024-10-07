@@ -1,0 +1,15 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
+    <body class="container">
+        <h3>Employee List</h3>
+        <div class="eg">
+            <t:grid source="employees" row="currEmployee" rowsPerPage="4" add="address" reorder="id,name,age,address" pagerPosition="top">
+                <p:nameCell>
+                    <t:pagelink page="Index" context="currEmployee.id">${currEmployee.name}</t:pagelink>
+                </p:nameCell>
+                <p:addressCell>
+                    ${currEmployee.address.street1}
+                </p:addressCell>
+            </t:grid>
+        </div>
+    </body>
+</html>
