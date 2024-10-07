@@ -1,5 +1,6 @@
 package org.example.pages.employee;
 
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Property;
 import org.example.entities.Address;
 import org.example.entities.Employee;
@@ -7,6 +8,7 @@ import org.example.entities.Employee;
 import java.util.ArrayList;
 import java.util.List;
 
+@Import(stylesheet = "context:css/custom.css")
 public class ViewEmployee {
 
     @Property

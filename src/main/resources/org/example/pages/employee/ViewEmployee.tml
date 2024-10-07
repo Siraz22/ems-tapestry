@@ -1,4 +1,12 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
-    <h3>View Employee ${employeeId}</h3>
-    <t:beandisplay object="employee"/>
+    <body class="container">
+        <h3>View Employee ${employeeId}</h3>
+        <div class="eg">
+            <h4>Personal Details</h4>
+            <t:beandisplay object="employee"/>
+
+            <h4>Address Details</h4>
+            <t:beandisplay object="employee.address"/>
+        </div>
+    </body>
 </html>
