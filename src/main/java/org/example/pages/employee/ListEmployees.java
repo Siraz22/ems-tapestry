@@ -1,4 +1,4 @@
-package org.example.pages;
+package org.example.pages.employee;
 
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Property;
