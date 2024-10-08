@@ -4,7 +4,7 @@
         <div class="eg">
             <t:grid source="employees" row="currEmployee" rowsPerPage="4" add="address" reorder="id,name,age,address" pagerPosition="top">
                 <p:nameCell>
-                    <t:pagelink page="Index" context="currEmployee.id">${currEmployee.name}</t:pagelink>
+                    <t:pagelink page="employee/ViewEmployee" context="currEmployee.id">${currEmployee.name}</t:pagelink>
                 </p:nameCell>
                 <p:addressCell>
                     ${currEmployee.address.street1}

@@ -1,4 +1,4 @@
-package org.example.pages;
+package org.example.pages.employee;
 
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Property;
@@ -9,19 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Import(stylesheet = "context:css/custom.css")
-public class ListEmployees {
+public class ViewEmployee {
 
     @Property
-    List<Employee> employees;
+    private Integer employeeId;
 
     @Property
-    Employee currEmployee;
+    private Employee employee;
 
-    void setupRender(){
-        employees = createDummyEmployeeList();
+    void onActivate(Integer employeeId) {
+        this.employeeId = employeeId;
+        this.employee = dummyServiceFind();
     }
 
-    public static List<Employee> createDummyEmployeeList() {
+    Employee dummyServiceFind(){
         List<Employee> employees = new ArrayList<>();
 
         Employee emp1 = new Employee();
@@ -90,13 +91,15 @@ public class ListEmployees {
         address6.setCountry("Germany");
         emp6.setAddress(address6);
 
-        employees.add(emp1);
-        employees.add(emp2);
-        employees.add(emp3);
-        employees.add(emp4);
-        employees.add(emp5);
-        employees.add(emp6);
-
-        return employees;
+        switch (employeeId){
+            case 1 : return emp1;
+            case 2 : return emp2;
+            case 3 : return emp3;
+            case 4 : return emp4;
+            case 5 : return emp5;
+            case 6 : return emp6;
+            default: return null;
+        }
     }
+
 }
