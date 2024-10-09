@@ -25,20 +25,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public List<Employee> findAll(){
         Session session = sessionFactory.getCurrentSession();
-
-        // Get the CriteriaBuilder from the session
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 
-        // Create a CriteriaQuery for the Employee entity
         CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
-
-        // Specify the root class for the query
         Root<Employee> root = criteriaQuery.from(Employee.class);
-
-        // Select the root in the criteria query
         criteriaQuery.select(root);
 
-        // Create and execute the query
         return session.createQuery(criteriaQuery).getResultList();
     }
 }

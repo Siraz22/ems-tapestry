@@ -37,5 +37,6 @@ public class AppModule {
     public static void contributeApplicationDefaults(MappedConfiguration<String, Object> configuration) {
         configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en,fr,de");
         configuration.add(SymbolConstants.FILE_CHECK_INTERVAL, "10 m");
+        configuration.add(SymbolConstants.ENABLE_PAGELOADING_MASK, false);
     }
 }
