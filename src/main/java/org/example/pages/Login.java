@@ -6,7 +6,12 @@ import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextField;
+import org.example.entities.Employee;
 import org.example.pages.employee.ListEmployees;
+import org.example.services.EmployeeService;
+
+import javax.inject.Inject;
+import java.util.List;
 
 @Import(stylesheet = "context:css/custom.css")
 public class Login {
@@ -28,9 +33,14 @@ public class Login {
     @InjectPage
     private ListEmployees listEmployees;
 
+    @Inject
+    private EmployeeService employeeService;
+
     void setupRender(){
         username="admin";
         password="password123";
+        List<Employee> employees = employeeService.findAll();
+        System.out.println(employees);
     }
 
     void onValidateFromForm(){

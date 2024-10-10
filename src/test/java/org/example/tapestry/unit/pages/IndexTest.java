@@ -5,7 +5,6 @@ import org.apache.tapestry5.test.PageTester;
 import org.junit.jupiter.api.Test;
 
 import org.example.services.AppModule;
-import org.example.services.QaModule;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,7 +15,7 @@ public class IndexTest {
         // given
         String appPackage = "org.example";
         String appName = "App";
-        PageTester tester = new PageTester(appPackage, appName, "src/main/webapp", AppModule.class, QaModule.class);
+        PageTester tester = new PageTester(appPackage, appName, "src/main/webapp", AppModule.class);
 
         // when
         Document doc = tester.renderPage("Index");

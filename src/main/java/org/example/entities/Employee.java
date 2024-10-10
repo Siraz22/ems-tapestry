@@ -1,10 +1,23 @@
 package org.example.entities;
 
+import javax.persistence.*;
+
+@Table(name="employee")
+@Entity
 public class Employee {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name="name")
     private String name;
+
+    @Column(name = "age")
     private Integer age;
+
+    @OneToOne
+    @JoinColumn(name = "ref_address")
     private Address address;
 
     public String getName() {

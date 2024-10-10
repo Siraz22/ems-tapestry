@@ -9,6 +9,9 @@
                 <p:addressCell>
                     ${currEmployee.address.street1}
                 </p:addressCell>
+                <p:actionCell>
+                    <t:pagelink page="emploee/AddEmployee"/>
+                </p:actionCell>
             </t:grid>
         </div>
     </body>
