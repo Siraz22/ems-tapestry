@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface EmployeeDAO {
     List<Employee> findAll();
+
+    Employee findById(Integer id);
 }

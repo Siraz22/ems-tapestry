@@ -25,12 +25,25 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public List<Employee> findAll(){
         Session session = sessionFactory.getCurrentSession();
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
 
-        CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
+        CriteriaQuery<Employee> criteriaQuery = cb.createQuery(Employee.class);
         Root<Employee> root = criteriaQuery.from(Employee.class);
         criteriaQuery.select(root);
 
         return session.createQuery(criteriaQuery).getResultList();
+    }
+
+    @Override
+    public Employee findById(Integer id){
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+
+        CriteriaQuery<Employee> criteriaQuery = cb.createQuery(Employee.class);
+        Root<Employee> root = criteriaQuery.from(Employee.class);
+
+        criteriaQuery.select(root).where(cb.equal(root.get("id"), id));
+        return session.createQuery(criteriaQuery).uniqueResult();
+
     }
 }
