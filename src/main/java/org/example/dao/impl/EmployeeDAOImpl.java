@@ -44,6 +44,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
         criteriaQuery.select(root).where(cb.equal(root.get("id"), id));
         return session.createQuery(criteriaQuery).uniqueResult();
+    }
 
+    @Override
+    public Employee save(Employee employee){
+        Session session = sessionFactory.getCurrentSession();
+        session.save(employee);
+        return employee;
     }
 }
