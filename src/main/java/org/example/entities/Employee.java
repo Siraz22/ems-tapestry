@@ -1,9 +1,14 @@
 package org.example.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
-@Table(name="employee")
 @Entity
+@Getter
+@Setter
+@Table(name="employee")
 public class Employee {
 
     @Id
@@ -16,8 +21,9 @@ public class Employee {
     @Column(name = "age")
     private Integer age;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ref_address")
+
     private Address address;
 
     public String getName() {
