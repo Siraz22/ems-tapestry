@@ -6,6 +6,7 @@ import org.example.dto.EmployeeInDTO;
 import org.example.entities.Address;
 import org.example.entities.Employee;
 import org.example.services.EmployeeService;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,11 +45,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteById(Integer id) {
+        Employee employee = findById(id);
+        employeeDAO.deleteByEmployee(employee);
     }
 
     @Override
-    public Employee update(Employee employee) {
-        return null;
+    public Employee update(Integer id, Employee employee) {
+        return employeeDAO.updateEmployee(employee);
     }
 
     private Employee toEntity(EmployeeInDTO employeeInDTO){

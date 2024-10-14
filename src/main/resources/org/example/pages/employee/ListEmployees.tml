@@ -5,7 +5,7 @@
 
         <h3>Employee List</h3>
         <div class="eg">
-            <t:grid source="employees" row="currEmployee" rowsPerPage="4" add="address" reorder="id,name,age,address" pagerPosition="top">
+            <t:grid source="employees" row="currEmployee" rowsPerPage="4" add="address, action" reorder="id,name,age,address,action" pagerPosition="top">
                 <p:nameCell>
                     <t:pagelink page="employee/ViewEmployee" context="currEmployee.id">${currEmployee.name}</t:pagelink>
                 </p:nameCell>
@@ -13,7 +13,9 @@
                     ${currEmployee.address.street1}
                 </p:addressCell>
                 <p:actionCell>
-                    <t:pagelink page="emploee/AddEmployee"/>
+                    <t:actionlink t:id="deleteEmployeeById" t:context="currEmployee.id">delete?</t:actionlink>
+                    <br/>
+                    <t:pagelink page="employee/EditEmployee" context="currEmployee.id">update?</t:pagelink>
                 </p:actionCell>
             </t:grid>
         </div>

@@ -25,4 +25,9 @@ public class ListEmployees {
     void setupRender(){
         employees = employeeService.findAll();
     }
+
+    void onActionFromDeleteEmployeeById(Integer employeeId){
+        employeeService.deleteById(employeeId);
+    }
+
 }
