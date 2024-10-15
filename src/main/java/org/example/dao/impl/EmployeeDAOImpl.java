@@ -50,7 +50,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public Employee save(Employee employee){
         Session session = sessionFactory.getCurrentSession();
-        session.load(employee, "12");
         session.save(employee);
         return employee;
     }

@@ -1,4 +1,11 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
+    <head>
+        <script>
+            function confirmDelete() {
+                return confirm('Are you sure you want to delete this employee?');
+            }
+        </script>
+    </head>
     <body class="container">
 
         <t:pagelink page="employee/AddEmployee">Add New Employee</t:pagelink><br/>
@@ -13,7 +20,7 @@
                     ${currEmployee.address.street1}
                 </p:addressCell>
                 <p:actionCell>
-                    <t:actionlink t:id="deleteEmployeeById" t:context="currEmployee.id">delete?</t:actionlink>
+                    <t:actionlink t:id="deleteEmployeeById" t:context="currEmployee.id" onclick="return confirmDelete();">delete?</t:actionlink>
                     <br/>
                     <t:pagelink page="employee/EditEmployee" context="currEmployee.id">update?</t:pagelink>
                 </p:actionCell>
