@@ -21,7 +21,7 @@ public class Employee {
     @Column(name = "age")
     private Integer age;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ref_address")
 
     private Address address;

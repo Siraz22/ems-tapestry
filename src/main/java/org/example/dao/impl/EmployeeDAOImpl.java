@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -50,6 +51,21 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public Employee save(Employee employee){
         Session session = sessionFactory.getCurrentSession();
         session.save(employee);
+        return employee;
+    }
+
+    @Override
+    @Transactional
+    public void deleteByEmployee(Employee employee){
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(employee);
+    }
+
+    @Override
+    @Transactional
+    public Employee updateEmployee(Employee employee){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(employee);
         return employee;
     }
 }

@@ -1,11 +1,18 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
+    <head>
+        <script>
+            function confirmDelete() {
+                return confirm('Are you sure you want to delete this employee?');
+            }
+        </script>
+    </head>
     <body class="container">
 
         <t:pagelink page="employee/AddEmployee">Add New Employee</t:pagelink><br/>
 
         <h3>Employee List</h3>
         <div class="eg">
-            <t:grid source="employees" row="currEmployee" rowsPerPage="4" add="address" reorder="id,name,age,address" pagerPosition="top">
+            <t:grid source="employees" row="currEmployee" rowsPerPage="4" add="address, action" reorder="id,name,age,address,action" pagerPosition="top">
                 <p:nameCell>
                     <t:pagelink page="employee/ViewEmployee" context="currEmployee.id">${currEmployee.name}</t:pagelink>
                 </p:nameCell>
@@ -13,7 +20,9 @@
                     ${currEmployee.address.street1}
                 </p:addressCell>
                 <p:actionCell>
-                    <t:pagelink page="emploee/AddEmployee"/>
+                    <t:actionlink t:id="deleteEmployeeById" t:context="currEmployee.id" onclick="return confirmDelete();">delete?</t:actionlink>
+                    <br/>
+                    <t:pagelink page="employee/EditEmployee" context="currEmployee.id">update?</t:pagelink>
                 </p:actionCell>
             </t:grid>
         </div>
