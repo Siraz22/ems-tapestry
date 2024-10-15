@@ -1,6 +1,0 @@
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
-    <body class="container">
-        <p>Are you sure you want to delete the following person?</p>
-
-    </body>
-</html>
