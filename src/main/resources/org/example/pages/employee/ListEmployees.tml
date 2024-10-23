@@ -12,7 +12,7 @@
 
         <h3>Employee List</h3>
         <div class="eg">
-            <t:grid source="employees" row="currEmployee" rowsPerPage="4" add="address, action" reorder="id,name,age,address,action" pagerPosition="top">
+            <t:grid source="employees" row="currEmployee" rowsPerPage="4" exclude="password, username" add="address, action" reorder="id,name,age,address,action" pagerPosition="top">
                 <p:nameCell>
                     <t:pagelink page="employee/ViewEmployee" context="currEmployee.id">${currEmployee.name}</t:pagelink>
                 </p:nameCell>

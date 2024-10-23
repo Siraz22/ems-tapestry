@@ -14,4 +14,6 @@ public interface EmployeeDAO {
     void deleteByEmployee(Employee employee);
 
     Employee updateEmployee(Employee employee);
+
+    Employee findByUsername(String username);
 }

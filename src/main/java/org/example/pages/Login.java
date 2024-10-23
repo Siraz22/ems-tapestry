@@ -1,13 +1,12 @@
 package org.example.pages;
 
-import org.apache.tapestry5.annotations.Import;
-import org.apache.tapestry5.annotations.InjectComponent;
-import org.apache.tapestry5.annotations.InjectPage;
-import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextField;
 import org.example.entities.Employee;
+import org.example.exception.BadRequestException;
 import org.example.pages.employee.ListEmployees;
+import org.example.services.AuthenticationService;
 import org.example.services.EmployeeService;
 
 import javax.inject.Inject;
@@ -21,14 +20,8 @@ public class Login {
     @Property
     private String password;
 
-    @InjectComponent("form")
-    private Form form;
-
-    @InjectComponent("username")
-    private TextField usernameField;
-
-    @InjectComponent("password")
-    private TextField passwordField;
+    @InjectComponent
+    private Form loginForm;
 
     @InjectPage
     private ListEmployees listEmployees;
@@ -36,30 +29,32 @@ public class Login {
     @Inject
     private EmployeeService employeeService;
 
+    @Inject
+    private AuthenticationService authenticationService;
+
     void setupRender(){
-        username="admin";
-        password="password123";
-        List<Employee> employees = employeeService.findAll();
-        System.out.println(employees);
     }
 
-    void onValidateFromForm(){
+    void onValidateFromLoginForm(){
         if(username == null || username.isEmpty()){
-            form.recordError(usernameField, "Username can't be empty!");
-        }
-        else if(!"admin".equals(username)){
-            form.recordError(usernameField,"Wrong username!");
+            loginForm.recordError("Username can't be empty!");
         }
 
         if(password == null || password.isEmpty()){
-            form.recordError(passwordField, "Password can't be empty!");
+            loginForm.recordError( "Password can't be empty!");
         }
-        else if(!"password123".equals(password)){
-            form.recordError(passwordField, "Password is wrong");
+
+        try {
+            authenticationService.validatePassword(username, password);
+        }
+        catch(BadRequestException bre){
+            loginForm.recordError("Login details are incorrect. Try again");
         }
     }
 
-    Object onSuccess(){
+    @Log
+    public Object onSuccessFromLoginForm(){
+        System.out.println("Successful login");
         return listEmployees;
     }
 }
