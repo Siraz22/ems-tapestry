@@ -23,8 +23,13 @@ public class Employee {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ref_address")
-
     private Address address;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "username")
+    private String username;
 
     public String getName() {
         return name;

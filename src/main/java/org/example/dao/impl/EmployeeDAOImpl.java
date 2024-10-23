@@ -68,4 +68,15 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         session.update(employee);
         return employee;
     }
+
+    public Employee findByUsername(String username){
+        Session session = sessionFactory.getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+
+        CriteriaQuery<Employee> criteriaQuery = cb.createQuery(Employee.class);
+        Root<Employee> root = criteriaQuery.from(Employee.class);
+
+        criteriaQuery.select(root).where(cb.equal(root.get("username"), username));
+        return session.createQuery(criteriaQuery).uniqueResult();
+    }
 }

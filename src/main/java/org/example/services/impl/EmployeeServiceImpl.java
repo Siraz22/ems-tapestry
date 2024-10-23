@@ -54,6 +54,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDAO.updateEmployee(employee);
     }
 
+    @Override
+    public Employee findByUsername(String username){
+        return employeeDAO.findByUsername(username);
+    }
+
     private Employee toEntity(EmployeeInDTO employeeInDTO){
         Employee employee = new Employee();
         employee.setAge(employee.getAge());

@@ -15,4 +15,6 @@ public interface EmployeeService {
     void deleteById(Integer id);
 
     Employee update(Integer id, Employee employee);
+
+    Employee findByUsername(String username);
 }
