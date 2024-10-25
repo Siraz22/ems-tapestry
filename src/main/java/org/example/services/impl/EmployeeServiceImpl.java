@@ -5,6 +5,7 @@ import org.example.dto.AddressInDTO;
 import org.example.dto.EmployeeInDTO;
 import org.example.entities.Address;
 import org.example.entities.Employee;
+import org.example.model.Role;
 import org.example.services.EmployeeService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Service
@@ -40,6 +42,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee save(Employee employee) {
         //TODO : find a way to use inDTO later
         //Employee employee = toEntity(employeeInDTO);
+
+        //default back to normal employee for now
+        if(isNull(employee.getRole())){
+            employee.setRole(Role.NORMAL_EMPLOYEE);
+        }
         return employeeDAO.save(employee);
     }
 

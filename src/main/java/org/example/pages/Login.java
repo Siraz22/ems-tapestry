@@ -10,6 +10,7 @@ import org.example.services.AuthenticationService;
 import org.example.services.EmployeeService;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Import(stylesheet = "context:css/custom.css")
@@ -31,6 +32,9 @@ public class Login {
 
     @Inject
     private AuthenticationService authenticationService;
+
+    @Inject
+    private HttpSession session;
 
     void setupRender(){
     }
@@ -55,7 +59,9 @@ public class Login {
     @Log
     public Object onSuccessFromLoginForm(){
         System.out.println("Successful login");
+        session.setAttribute("loggedInUsername", username);
         return listEmployees;
+
     }
 }
 

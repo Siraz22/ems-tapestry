@@ -16,5 +16,8 @@
 
         <mapping class="org.example.entities.Employee"/>
         <mapping class="org.example.entities.Address"/>
+        <mapping class="org.example.entities.EmployeeHasPermission"/>
+        <mapping class="org.example.entities.Permission"/>
+
     </session-factory>
 </hibernate-configuration>

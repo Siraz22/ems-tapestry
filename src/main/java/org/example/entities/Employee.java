@@ -2,8 +2,10 @@ package org.example.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.model.Role;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,6 +32,13 @@ public class Employee {
 
     @Column(name = "username")
     private String username;
+
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @OneToMany(mappedBy = "employee")
+    private List<EmployeeHasPermission> employeeHasPermissions;
 
     public String getName() {
         return name;

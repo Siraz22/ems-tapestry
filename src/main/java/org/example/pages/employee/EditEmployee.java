@@ -1,6 +1,5 @@
 package org.example.pages.employee;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
@@ -8,15 +7,29 @@ import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextField;
 import org.example.entities.Employee;
 import org.example.services.EmployeeService;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
 
-import static java.util.Objects.isNull;
-
 public class EditEmployee {
 
-    @Inject
-    private EmployeeService employeeService;
+    @Property
+    private Employee employee;
+
+    @Property
+    private Integer employeeId;
+
+    @Property
+    private String street1;
+
+    @Property
+    private String street2;
+
+    @Property
+    private String zip;
+
+    @Property
+    private String country;
 
     @InjectComponent("form")
     private Form form;
@@ -30,56 +43,59 @@ public class EditEmployee {
     @InjectPage
     private ListEmployees listEmployees;
 
-    @Property
-    private Employee employee;
-
-    @Property
-    private Integer employeeId;
+    @Inject
+    private EmployeeService employeeService;
 
     void onActivate(Integer employeeId){
         this.employeeId = employeeId;
         this.employee = employeeService.findById(employeeId);
+        if (employee != null && employee.getAddress() != null) {
+            street1 = employee.getAddress().getStreet1();
+            street2 = employee.getAddress().getStreet2();
+            zip = employee.getAddress().getZip();
+            country = employee.getAddress().getCountry();
+        }
     }
 
     Integer onPassivate(){
         return employeeId;
     }
 
-    void onPrepareForRender(){
-        if(form.isValid()){
+    void onPrepareForRender() {
+        if (form.isValid()) {
             employee = employeeService.findById(employeeId);
         }
     }
 
-    void onValidateFromForm(){
-        if(isNull(employee)){
-            form.recordError("employee data is somehow null");
+    void onValidateFromForm() {
+        if (employee == null) {
+            form.recordError("Employee data is null");
         }
 
-        //validate Employee
-        if(StringUtils.isEmpty(employee.getName())){
+        if (StringUtils.isEmpty(employee.getName())) {
             form.recordError(nameField, "Name can't be empty!");
         }
-        if(isNull(employee.getAge())){
-            form.recordError(ageField,"Age can't be empty");
+        if (employee.getAge() == null) {
+            form.recordError(ageField, "Age can't be empty!");
         }
 
-        //validate Address
-        if (StringUtils.isEmpty(employee.getAddress().getStreet1())) {
+        if (StringUtils.isEmpty(street1)) {
             form.recordError("Street 1 can't be empty!");
         }
-        if (StringUtils.isEmpty(employee.getAddress().getStreet2())) {
-            form.recordError("Street 2 can't be empty!");
-        }
-        if (StringUtils.isEmpty(employee.getAddress().getZip())) {
+        if (StringUtils.isEmpty(zip)) {
             form.recordError("Zip code can't be empty!");
         }
-        if (StringUtils.isEmpty(employee.getAddress().getCountry())) {
+        if (StringUtils.isEmpty(country)) {
             form.recordError("Country can't be empty!");
         }
     }
 
-    Object onSuccess(){
+    Object onSuccess() {
+        employee.getAddress().setStreet1(street1);
+        employee.getAddress().setStreet2(street2);
+        employee.getAddress().setZip(zip);
+        employee.getAddress().setCountry(country);
+
         employeeService.update(employeeId, employee);
         return listEmployees;
     }

@@ -1,57 +1,71 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd">
-    <body style="margin: 10px">
-        <h3>Add Employee</h3>
-        <t:form t:id="form" class="form-horizontal">
-            <div class="form-group">
-                <t:label for="name" class="col-sm-2" />
-                <div class="col-sm-4">
-                    <t:textfield t:id="name" t:value="employee.name" class="form-control"/>
-                </div>
-            </div>
+<body style="margin: 10px;">
+<h3>Add Employee</h3>
+<form t:type="form" t:id="form" class="form-horizontal">
+    <div t:type="Errors" t:banner="message:validation-banner" class="alert alert-danger"></div>
 
-            <div class="form-group">
-                <t:label for="age" class="col-sm-2" />
-                <div class="col-sm-4">
-                    <t:textfield t:id="age" t:value="employee.age" class="form-control"/>
-                </div>
-            </div>
+    <div class="form-group">
+        <label t:type="label" for="name"/>
+        <div class="col-sm-4">
+            <input type="text" t:type="textfield" t:id="name" t:validate="required" placeholder="Name"/>
+        </div>
+    </div>
 
-            <h4>Address</h4>
-            <div class="form-group">
-                <t:label for="street1" class="col-sm-2"/>
-                <div class="col-sm-4">
-                    <t:textfield t:id="street1" t:value="employee.address.street1" class="form-control"/>
-                </div>
-            </div>
+    <div class="form-group">
+        <label t:type="label" for="username"/>
+        <div class="col-sm-4">
+            <input type="text" t:type="textfield" t:id="username" t:validate="required" placeholder="Username"/>
+        </div>
+    </div>
 
-            <div class="form-group">
-                <t:label for="street2" class="col-sm-2" />
-                <div class="col-sm-4">
-                    <t:textfield t:id="street2" t:value="employee.address.street2" class="form-control"/>
-                </div>
-            </div>
+    <div class="form-group">
+        <label t:type="label" for="password"/>
+        <div class="col-sm-4">
+            <input type="password" t:type="passwordfield" t:id="password" t:validate="required" placeholder="Password"/>
+        </div>
+    </div>
 
-            <div class="form-group">
-                <t:label for="zip" class="col-sm-2" />
-                <div class="col-sm-4">
-                    <t:textfield t:id="zip" t:value="employee.address.zip" class="form-control"/>
-                </div>
-            </div>
+    <div class="form-group">
+        <label t:type="label" for="age"/>
+        <div class="col-sm-4">
+            <input type="number" t:type="textfield" t:id="age" t:validate="required" placeholder="Age"/>
+        </div>
+    </div>
 
-            <div class="form-group">
-                <t:label for="country" class="col-sm-2"/>
-                <div class="col-sm-4">
-                    <t:textfield t:id="country" t:value="employee.address.country" class="form-control"/>
-                </div>
-            </div>
+    <h4>Address</h4>
+    <div class="form-group">
+        <label t:type="label" for="street1"/>
+        <div class="col-sm-4">
+            <input type="text" t:type="textfield" t:id="street1" t:validate="required" placeholder="Street 1"/>
+        </div>
+    </div>
 
-            <div class="form-group">
-                <div class="col-sm-4">
-                    <t:submit value="Create Employee"/>
-                </div>
-            </div>
-        </t:form>
+    <div class="form-group">
+        <label t:type="label" for="street2"/>
+        <div class="col-sm-4">
+            <input type="text" t:type="textfield" t:id="street2" placeholder="Street 2"/>
+        </div>
+    </div>
 
-        <t:pagelink page="employee/ListEmployees">Go back to Employee List</t:pagelink><br/>
-    </body>
+    <div class="form-group">
+        <label t:type="label" for="zip"/>
+        <div class="col-sm-4">
+            <input type="text" t:type="textfield" t:id="zip" t:validate="required" placeholder="Zip Code"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label t:type="label" for="country"/>
+        <div class="col-sm-4">
+            <input type="text" t:type="textfield" t:id="country" t:validate="required" placeholder="Country"/>
+        </div>
+    </div>
+
+    <div>
+        <input type="submit" class="btn btn-primary" value="Create Employee"/>
+    </div>
+</form>
+
+<t:pagelink page="employee/ListEmployees">Go back to Employee List</t:pagelink>
+</body>
 </html>

@@ -8,7 +8,9 @@ import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextField;
 import org.example.entities.Address;
 import org.example.entities.Employee;
+import org.example.model.Role;
 import org.example.services.EmployeeService;
+import org.w3c.dom.Text;
 
 import javax.inject.Inject;
 import static java.util.Objects.isNull;
@@ -25,11 +27,30 @@ public class AddEmployee {
     @InjectComponent("form")
     private Form form;
 
-    @InjectComponent("name")
-    private TextField nameField;
+    @Property
+    private String name;
 
-    @InjectComponent("age")
-    private TextField ageField;
+    @Property
+    private Integer age;
+
+    @Property
+    private String username;
+
+    @Property
+    private String password;
+
+    //Address
+    @Property
+    private String street1;
+
+    @Property
+    private String street2;
+
+    @Property
+    private String zip;
+
+    @Property
+    private String country;
 
     @Inject
     private EmployeeService employeeService;
@@ -51,35 +72,52 @@ public class AddEmployee {
 
     void onValidateFromForm(){
 
-        if(isNull(employee)){
-            form.recordError("employee data is somehow null");
+        //Employee Details
+        if (StringUtils.isEmpty(username)) {
+            form.recordError("Username can't be empty!");
+        }
+        if (StringUtils.isEmpty(password)) {
+            form.recordError("Password can't be empty!");
+        }
+        if (StringUtils.isEmpty(name)) {
+            form.recordError("Name can't be empty!");
+        }
+        if (age == null) {
+            form.recordError("Age can't be empty!");
         }
 
-        //validate Employee
-        if(StringUtils.isEmpty(employee.getName())){
-            form.recordError(nameField, "Name can't be empty!");
-        }
-        if(isNull(employee.getAge())){
-            form.recordError(ageField,"Age can't be empty");
-        }
-
-        //validate Address
-        if (StringUtils.isEmpty(employee.getAddress().getStreet1())) {
+        // Validate Address
+        if (StringUtils.isEmpty(street1)) {
             form.recordError("Street 1 can't be empty!");
         }
-        if (StringUtils.isEmpty(employee.getAddress().getStreet2())) {
-            form.recordError("Street 2 can't be empty!");
-        }
-        if (StringUtils.isEmpty(employee.getAddress().getZip())) {
+        if (StringUtils.isEmpty(zip)) {
             form.recordError("Zip code can't be empty!");
         }
-        if (StringUtils.isEmpty(employee.getAddress().getCountry())) {
+        if (StringUtils.isEmpty(country)) {
             form.recordError("Country can't be empty!");
         }
     }
 
     Object onSuccess(){
+        Employee employee = new Employee();
+        employee.setName(name);
+        employee.setUsername(username);
+        employee.setPassword(password);
+        employee.setAge(age);
+
+        Address address = new Address();
+        address.setStreet1(street1);
+        address.setStreet2(street2);
+        address.setZip(zip);
+        address.setCountry(country);
+
+        employee.setAddress(address);
+
+        //By default, keep any new employee as normal employee
+        employee.setRole(Role.NORMAL_EMPLOYEE);
+
         employeeService.save(employee);
+
         return listEmployees;
     }
 }
