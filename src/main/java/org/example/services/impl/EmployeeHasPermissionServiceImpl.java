@@ -14,9 +14,17 @@ public class EmployeeHasPermissionServiceImpl implements EmployeeHasPermissionSe
     @Inject
     private EmployeeService employeeService;
 
+    //TODO : using hardcoded permissions. can improve this
     @Override
-    public boolean employeeHasPermission(Integer employeeId, Permission permission) {
-        Employee employee = employeeService.findById(employeeId);
+    public boolean employeeHasPermission(String username, String hardcodedPermission) {
+        Employee employee = employeeService.findByUsername(username);
+        return employee.getEmployeeHasPermissions().stream()
+                .anyMatch(employeeHasPermission -> employeeHasPermission.getPermission().getName().equals(hardcodedPermission));
+    }
+
+    @Override
+    public boolean employeeHasPermission(String username, Permission permission) {
+        Employee employee = employeeService.findByUsername(username);
         return employeeHasPermission(employee, permission);
     }
 

@@ -8,6 +8,7 @@
     </head>
     <body class="container">
 
+        <h5>Welcome ${username}</h5>
         <t:pagelink page="employee/AddEmployee">Add New Employee</t:pagelink><br/>
 
         <h3>Employee List</h3>
@@ -22,7 +23,11 @@
                 <p:actionCell>
                     <t:actionlink t:id="deleteEmployeeById" t:context="currEmployee.id" onclick="return confirmDelete();">delete?</t:actionlink>
                     <br/>
-                    <t:pagelink page="employee/EditEmployee" context="currEmployee.id">update?</t:pagelink>
+<!--                    <t:pagelink page="employee/EditEmployee" context="currEmployee.id">update?</t:pagelink>-->
+                    <t:if test="hasEditAccess">
+                        <t:pagelink page="employee/EditEmployee" context="currEmployee.id">update?</t:pagelink>
+                    </t:if>
+
                 </p:actionCell>
             </t:grid>
         </div>

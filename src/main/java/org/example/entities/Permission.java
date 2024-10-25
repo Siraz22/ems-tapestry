@@ -18,7 +18,7 @@ public class Permission {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "permissions")
+    @OneToMany(mappedBy = "permission")
     List<EmployeeHasPermission> employeeHasPermissions;
 
 

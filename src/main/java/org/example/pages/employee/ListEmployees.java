@@ -1,16 +1,13 @@
 package org.example.pages.employee;
 
 import org.apache.tapestry5.annotations.Import;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
-import org.example.entities.Address;
 import org.example.entities.Employee;
-import org.example.entities.Permission;
 import org.example.services.EmployeeHasPermissionService;
 import org.example.services.EmployeeService;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @Import(stylesheet = "context:css/custom.css")
@@ -23,6 +20,10 @@ public class ListEmployees {
     Employee currEmployee;
 
     @Property
+    @Persist
+    private String username;
+
+    @Property
     private boolean hasEditAccess;
 
     @Inject
@@ -31,15 +32,16 @@ public class ListEmployees {
     @Inject
     private EmployeeHasPermissionService employeeHasPermissionService;
 
-    @Inject
-    private HttpSession session;
-
     void setupRender(){
-
-        String username = (String) session.getAttribute("loggedInUser");
-
-//        hasEditAccess = employeeHasPermissionService.employeeHasPermission()
+        System.out.println("logged in user is "+username);
+        hasEditAccess = employeeHasPermissionService.employeeHasPermission(username, "edit_employee");
         employees = employeeService.findAll();
+
+        System.out.println("access for edit is "+hasEditAccess);
+    }
+
+    public void onActivate(String username){
+        this.username = username;
     }
 
     void onActionFromDeleteEmployeeById(Integer employeeId){
